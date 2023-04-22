@@ -1,0 +1,187 @@
+<div class="container">
+  <!-- <div class="row">
+    <h1>Product</h1>
+  </div> -->
+  <div class="row">
+    <form>
+      <label>Name</label>
+      <input name="name" ng-model="seach" />
+      <a href="#product/seach/{{seach}}" class="btn btn-success">Tìm Kiếm</a>
+    </form>
+  </div>
+  <div class="row">
+    <!-- <div class="col-lg-3">
+      <a href="#product/new" class="btn btn-success btn-sm mb-3">Add Product</a>
+    </div> -->
+    <form novalidate name="frm">
+      <div class="m-3">
+        <div class="form-group" style="width: 400px">
+          <input
+            type="text"
+            class="form-control"
+            ng-model="product.id"
+            style="display: none"
+          />
+        </div>
+        <div class="form-group" style="width: 400px">
+          <label class="col-form-label col-sm-4">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="productName"
+            ng-model="product.productName"
+            required
+          />
+          <span ng-show="frm.productName.$error.required" style="color: red"
+            >Product Name Trong!</span
+          >
+        </div>
+
+        <div class="form-group" style="width: 400px">
+          <label class="col-form-label col-sm-4">Color</label>
+
+          <input
+            type="text"
+            class="form-control"
+            name="color"
+            ng-model="product.color"
+            required
+          />
+          <span ng-show="frm.color.$error.required" style="color: red"
+            >Color Trong!</span
+          >
+        </div>
+        <span></span>
+        <div class="form-group" style="width: 400px">
+          <label class="col-form-label col-sm-4">Quantity</label>
+
+          <input
+            type="text"
+            class="form-control"
+            name="quantity"
+            ng-model="product.quantity"
+            ng-pattern="/^[0-9]+$/"
+            required
+          />
+          <span ng-show="frm.quantity.$error.required" style="color: red"
+            >Quantity Trong!</span
+          >
+          <span ng-show="frm.quantity.$error.pattern" style="color: red"
+            >Quantity Phai Là Số Và Lớn Hơn 0!</span
+          >
+        </div>
+
+        <div class="form-group" style="width: 400px">
+          <label class="col-form-label col-sm-4">Sell price</label>
+
+          <input
+            type="text"
+            class="form-control"
+            name="sellPrice"
+            ng-model="product.sellPrice"
+            ng-pattern="/^[0-9]+$/"
+            required
+          />
+          <span ng-show="frm.sellPrice.$error.required" style="color: red"
+            >Sell Price Trong!</span
+          >
+          <span ng-show="frm.sellPrice.$error.pattern" style="color: red"
+            >Sell Price Phai Là Số Và Lớn Hơn 0!</span
+          >
+        </div>
+
+        <div class="form-group" style="width: 400px">
+          <label class="col-form-label col-sm-4">Origin price</label>
+
+          <input
+            type="text"
+            class="form-control"
+            name="originPrice"
+            ng-model="product.originPrice"
+            ng-pattern="/^[0-9]+$/"
+            required
+          />
+          <span ng-show="frm.originPrice.$error.required" style="color: red"
+            >origin Price Trong!</span
+          >
+          <span ng-show="frm.originPrice.$error.pattern" style="color: red"
+            >Origin Price Phai Là Số Và Lớn Hơn 0!</span
+          >
+        </div>
+
+        <div class="form-group" style="width: 400px">
+          <label class="col-form-label col-sm-4">Brand Name : </label>
+          <select ng-model="product.brandId">
+            <option ng-repeat="b in listbrands" ng-value="{{b.id}}">
+              {{b.brandName}}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group" style="width: 400px">
+          <label class="col-form-label col-sm-4">SubCategory : </label>
+          <select ng-model="product.subCategoryId">
+            <option ng-repeat="c in listcate" ng-value="{{c.id}}">
+              {{c.subName}}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group" style="width: 400px">
+          <label class="col-form-label"
+            >Status : &emsp; &emsp; &emsp; &emsp;
+          </label>
+          <select ng-model="product.statusId">
+            <option ng-repeat="s in liststatus" ng-value="{{s.id}}">
+              {{s.statusName}}
+            </option>
+          </select>
+        </div>
+        <br />
+        <div class="form-group" style="width: 400px">
+          <a href="#product/new" class="btn btn-success">Add</a>
+          <a
+            href="#product/update/{{product.id}}"
+            class="btn btn-success"
+            style="margin-left: 200px"
+            >Update</a
+          >
+        </div>
+      </div>
+    </form>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>Product Name</th>
+        <th>Brand Name</th>
+        <th>Subcategory</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Function</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="p in listProduct">
+        <td>{{$index + 1}}</td>
+        <td>{{p.productName}}</td>
+        <td>{{p.brandName}}</td>
+        <td>{{p.subCategory}}</td>
+        <td>{{p.price}}</td>
+        <td>{{p.status}}</td>
+        <td>
+          <a
+            href="#product/detail/{{p.id}}"
+            class="btn btn-info"
+            ng-click="detail($event,p.id);"
+            ><i class="fa-regular fa-eye"></i>
+          </a>
+          <a href="#product/delete/{{p.id}}" class="btn btn-success"
+            ><i class="fa-sharp fa-solid fa-trash"></i
+          ></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
